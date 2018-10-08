@@ -10,6 +10,7 @@ import static java.lang.Thread.sleep;
 
 public class BadCodeExample {
 //main must be one
+    //wait instead of sleep to be later
     public static void main(String args[]) throws InterruptedException {
         String searchTerm = "Selenium";
         WebDriver webDriver = new FirefoxDriver();
