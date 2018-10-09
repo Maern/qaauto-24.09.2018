@@ -1,5 +1,5 @@
 Setup on Windows:
 1. Install JDK 10
 2. Install Inellij IDEA
-3. Download Geckodriver (https://github.com/mozilla/geckodriver/releases) and put it in System32 folder
+3. Download Geckodriver (https://github.com/mozilla/geckodriver/releases), unzip and put it in System32 folder
 4. Download and install Firefox browser
