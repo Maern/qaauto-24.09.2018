@@ -17,5 +17,6 @@ pom.xml - contains all dependencies required to run project. DO NOT DELETE
 README.md - just README file ))))
 
 HOW TO RUN
-1. Pull files from Git to Idea
-2. Run BadCodeExample from src/main/java folder
+1. Clone repository from Git to Idea (VCS->Git->Clone)
+2. Open cloned project files in Idea
+3. Run BadCodeExample from src/main/java folder
