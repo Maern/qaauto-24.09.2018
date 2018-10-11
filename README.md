@@ -15,6 +15,7 @@ Project-related files explanation
 pom.xml - contains all dependencies required to run project. DO NOT DELETE
 
 .gitignore - contains files and folders to be ignored by Git when commiting and pushing to repository
+
 README.md - just README file ))))
 
 HOW TO RUN
