@@ -3,10 +3,10 @@ Tools installation
 2. Firefox
 3. IntelliJ Idea (Community Edition will be enough - https://www.jetbrains.com/idea/download/#section=windows)
 4. GeckoDriver (https://github.com/mozilla/geckodriver/releases)
-5. Git fow Windows (if you don't have one https://gitforwindows.org/)
+5. Git for Windows (if you don't have one https://gitforwindows.org/)
 
 Tools setup
-1. To install GeckoDriver put it to Windows\System32 folder
+1. To install GeckoDriver - put it to Windows\System32 folder
 2. To install and run JDK to your PC - open Environment Variables
 and add Variable JAVA_HOME with path to JDK installation folder (i.e. C:\Program Files\Java\jdk-10.0.2)
 
