@@ -1,5 +1,5 @@
 Tools installation
-1. JDK 10
+1. JDK 10 (https://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html)
 2. Firefox
 3. IntelliJ Idea (Community Edition will be enough - https://www.jetbrains.com/idea/download/#section=windows)
 4. GeckoDriver (https://github.com/mozilla/geckodriver/releases)
