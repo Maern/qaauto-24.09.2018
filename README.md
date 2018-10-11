@@ -19,4 +19,3 @@ README.md - just README file ))))
 HOW TO RUN
 1. Pull files from Git to Idea
 2. Run BadCodeExample from src/main/java folder
-ABCDEF
