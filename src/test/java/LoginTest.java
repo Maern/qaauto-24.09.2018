@@ -1,11 +1,11 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static java.lang.Thread.sleep;
 
 public class LoginTest {
     WebDriver webDriver;
@@ -38,43 +38,35 @@ public class LoginTest {
      */
     @Test
 
-    public void  successfulLoginTest () {//throws InterruptedException {
-        /*String logIn = "avdieievm@gmail.com";
-        String password = "Blastek17";
-        WebDriver webDriver = new FirefoxDriver();
-        webDriver.navigate().to(  "https://www.linkedin.com");
-        //Assert.assertEquals("actual", "expected", "error msg");
-        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/", "wrong Homepage URL");
-        WebElement loginField = webDriver.findElement(By.id("login-email"));
-        WebElement passwordField = webDriver.findElement(By.id("login-password"));
-        loginField.sendKeys(logIn);
-        passwordField.sendKeys(password);
-        passwordField.sendKeys(Keys.RETURN);
-        sleep (10000);
-        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/feed/","Incorrect page is loaded");
-
-        webDriver.quit();*/
-
+    public void  successfulLoginTest () throws InterruptedException {
 
             webDriver.get("https://linkedin.com");
             LoginPage loginPage = new LoginPage(webDriver);
 
+
             Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
                     "Login page URL is wrong.");
+            Assert.assertEquals(webDriver.getTitle(), "LinkedIn: Log In or Sign Up", "Login page title is wrong");
+
+            Assert.assertTrue(loginPage.signInButton.isDisplayed(),"SignInButton is not displayed on LogIn page.");
 
             loginPage.login("avdieievm@gmail.com", "Blastek17");
 
             Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/feed/",
                     "Home page URL is wrong.");
+            Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong");
+            HomePage homePage = new HomePage(webDriver);
+            Assert.assertTrue(homePage.profileNavItem.isDisplayed(),"profileNavItem is not displayed");
+        //li[@id='profile-nav-item']
         }
     @Test
-    public void negativeLoginTest(){
+    public void negativeLoginWithEmptyPasswordTest(){
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
                 "Login page URL is wrong.");
 
-        loginPage.login("avdieiev@gmail.com", "123");;
+        loginPage.login("avdieiev@gmail.com", "123");
 
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
                 "Login page URL is wrong.");
@@ -86,7 +78,7 @@ public class LoginTest {
     Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
             "Login page URL is wrong.");
 
-    loginPage.login("avdieievm@gmail.com", "Blastek18");;
+    loginPage.login("avdieievm@gmail.com", "Blastek18");
 
     Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME",
             "target page URL is wrong.");
