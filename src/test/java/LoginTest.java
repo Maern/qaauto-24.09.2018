@@ -38,26 +38,18 @@ public class LoginTest {
      */
     @Test
 
-    public void  successfulLoginTest () throws InterruptedException {
+    public void  successfulLoginTest () {
 
             webDriver.get("https://linkedin.com");
             LoginPage loginPage = new LoginPage(webDriver);
 
-
-            Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
-                    "Login page URL is wrong.");
-            Assert.assertEquals(webDriver.getTitle(), "LinkedIn: Log In or Sign Up", "Login page title is wrong");
-
-            Assert.assertTrue(loginPage.signInButton.isDisplayed(),"SignInButton is not displayed on LogIn page.");
+            Assert.assertTrue(loginPage.isPageLoaded(),"Login page is not loaded");
 
             loginPage.login("avdieievm@gmail.com", "Blastek17");
 
-            Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/feed/",
-                    "Home page URL is wrong.");
-            Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong");
             HomePage homePage = new HomePage(webDriver);
-            Assert.assertTrue(homePage.profileNavItem.isDisplayed(),"profileNavItem is not displayed");
-        //li[@id='profile-nav-item']
+            Assert.assertTrue(homePage.ishomePageLoaded(),"Home page is not loaded");
+
         }
     @Test
     public void negativeLoginWithEmptyPasswordTest(){
@@ -66,7 +58,7 @@ public class LoginTest {
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
                 "Login page URL is wrong.");
 
-        loginPage.login("avdieiev@gmail.com", "123");
+        loginPage.login("avdieiev@gmail.com", "");
 
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
                 "Login page URL is wrong.");
@@ -83,5 +75,5 @@ public class LoginTest {
     Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME",
             "target page URL is wrong.");
 }
-
+//TO DO: negative test - short password
     }
