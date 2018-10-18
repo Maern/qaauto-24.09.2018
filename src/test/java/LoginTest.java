@@ -79,7 +79,7 @@ public class LoginTest {
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
                 "Login page URL is wrong.");
     }
-@Test
+    @Test
     public void negativePasswordTest() {
     webDriver.get("https://linkedin.com");
     LoginPage loginPage = new LoginPage(webDriver);
@@ -89,7 +89,7 @@ public class LoginTest {
     loginPage.login("avdieievm@gmail.com", "Blastek18");;
 
     Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME",
-            "Login page URL is wrong.");
+            "target page URL is wrong.");
 }
 
     }
