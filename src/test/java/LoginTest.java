@@ -51,6 +51,7 @@ public class LoginTest {
             Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
 
         }
+
     @Test
     public void negativeLoginWithEmptyPasswordTest(){
         webDriver.get("https://linkedin.com");
@@ -88,7 +89,7 @@ public class LoginTest {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
-        loginPage.login("Joh Doe", "Blastek17");
+        loginPage.login("John Doe", "Blastek17");
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isnoEmailLoginError(),"incorrect error message displayed");
@@ -104,6 +105,5 @@ public class LoginTest {
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isinocrrectEmailError(),"incorrect error message displayed");
     }
-//TO DO: negative test - short password
-    //to do - negative test - no email
+
     }
