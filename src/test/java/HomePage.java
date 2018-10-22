@@ -21,6 +21,6 @@ public class HomePage {
 
     public boolean isPageLoaded(){
     return webDriver.getCurrentUrl().equals("https://www.linkedin.com/feed/") &&
-           webDriver.getTitle().equals("LinkedIn") && isprofileNavItemDisplayed();
+           webDriver.getTitle().contains("LinkedIn") && isprofileNavItemDisplayed();
     }
 }

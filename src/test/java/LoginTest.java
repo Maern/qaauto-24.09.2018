@@ -38,20 +38,19 @@ public class LoginTest {
      */
     @Test
 
-    public void  successfulLoginTest () {
+    public void  successfulLoginTest () throws InterruptedException {
 
             webDriver.get("https://linkedin.com");
             LoginPage loginPage = new LoginPage(webDriver);
 
             Assert.assertTrue(loginPage.isPageLoaded(),"Login page is not loaded");
 
-            loginPage.login("avdieievm@gmail.com", "Blastek17");
-
-            HomePage homePage = new HomePage(webDriver);
+            HomePage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
+            sleep(1500);
             Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
 
         }
-
+//TO DO: add methods 'login' with correct returns (HomePage, LoginPage, LoginSubmitPage)
     @Test
     public void negativeLoginWithEmptyPasswordTest(){
         webDriver.get("https://linkedin.com");
