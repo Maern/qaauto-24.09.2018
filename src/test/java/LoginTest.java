@@ -94,12 +94,13 @@ public class LoginTest {
         Assert.assertTrue(loginSubmitPage.isnoEmailLoginError(),"incorrect error message displayed");
         }
     @Test
-    public void negativeIncorrectEmailTest(){
+    public void negativeIncorrectEmailTest() throws InterruptedException {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
         loginPage.login("avdieievm@gmail.co", "Blastek17");
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
+        sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isinocrrectEmailError(),"incorrect error message displayed");
     }
