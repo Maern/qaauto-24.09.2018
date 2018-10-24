@@ -15,10 +15,10 @@ public class LoginTest {
         webDriver = new FirefoxDriver();
     }
 
-    @AfterMethod
+   /* @AfterMethod
     public void afterMethod() {
         webDriver.quit();
-    }
+    }*/
 
     /**
      *Preconditions:
@@ -45,8 +45,8 @@ public class LoginTest {
 
             Assert.assertTrue(loginPage.isPageLoaded(),"Login page is not loaded");
 
-            HomePage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
-            sleep(1500);
+            ParentPage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
+            sleep(3000);
             Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
 
         }
@@ -62,34 +62,37 @@ public class LoginTest {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
     }
     @Test
-    public void negativePasswordTest() {
+    public void negativePasswordTest() throws InterruptedException {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
         loginPage.login("avdieievm@gmail.com", "Blastek18");
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
+        sleep(5000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordWrongError(),"incorrect message displayed");
 }
     @Test
-    public void negativeShortPasswordTest(){
+    public void negativeShortPasswordTest() throws InterruptedException {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
         loginPage.login("avdieievm@gmail.com", "Bla8");
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
+        sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordShortError(),"incorrect message displayed");
         }
     @Test
-    public void negativeNoEmailTest(){
+    public void negativeNoEmailTest() throws InterruptedException {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
         loginPage.login("John Doe", "Blastek17");
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
+        sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isnoEmailLoginError(),"incorrect error message displayed");
         }
