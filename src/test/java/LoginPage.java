@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends ParentPage {
+public class LoginPage {//extends ParentPage {
 
     private WebDriver webDriver;
     @FindBy(xpath = "//*[@id='login-email']")
@@ -26,7 +26,7 @@ public class LoginPage extends ParentPage {
     }
 
 
-    public ParentPage login(String userEmail, String userPassword) {
+    /*public ParentPage login(String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
@@ -37,8 +37,28 @@ public class LoginPage extends ParentPage {
         } else {
             return new LoginSubmitPage(webDriver);
         }
+
+    }*/
+
+    public HomePage login(String userEmail, String userPassword){
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+        return new HomePage(webDriver);
     }
 
+    public LoginPage loginl (String userEmail, String userPassword){
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+        return new LoginPage(webDriver);
+    }
+    public LoginSubmitPage logine (String userEmail, String userPassword){
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+        return new LoginSubmitPage(webDriver);
+    }
         public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/") &&
                 webDriver.getTitle().equals("LinkedIn: Log In or Sign Up") &&

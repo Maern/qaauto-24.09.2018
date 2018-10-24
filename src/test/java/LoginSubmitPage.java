@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 //div[@id='control_gen_1'] - general error element
 //span[@id='session_key-login-error'] - login related errors
 
-public class LoginSubmitPage extends ParentPage{
+public class LoginSubmitPage{ //extends ParentPage{
     private WebDriver webDriver;
     @FindBy(xpath = "//div[@id='control_gen_1']")
     private WebElement pageErrorMessage;
