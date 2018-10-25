@@ -1,10 +1,9 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends ParentPage{
+public class LoginPage extends ParentLoginPage {
 
     private WebDriver webDriver;
     @FindBy(xpath = "//*[@id='login-email']")
@@ -25,7 +24,7 @@ public class LoginPage extends ParentPage{
         return signInButton.isDisplayed();
     }
 
-    public ParentPage login (String userEmail, String userPassword){
+    public ParentLoginPage login (String userEmail, String userPassword){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
@@ -38,29 +37,26 @@ public class LoginPage extends ParentPage{
         else return new LoginSubmitPage(webDriver);
     }
 
-   /* public HomePage login(String userEmail, String userPassword){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        return new HomePage(webDriver);
-    }
-
-    public LoginPage loginl (String userEmail, String userPassword){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        return new LoginPage(webDriver);
-    }
-    public LoginSubmitPage logine (String userEmail, String userPassword){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        return new LoginSubmitPage(webDriver);
-    }*/
-        public boolean isPageLoaded() {
+    public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/") &&
                 webDriver.getTitle().equals("LinkedIn: Log In or Sign Up") &&
                 isSignInButtonDisplayed();
 
+    }
+
+    public boolean isinocrrectEmailError() {
+        return false;
+    }
+
+    public boolean ispasswordWrongError() {
+        return false;
+    }
+
+    public boolean ispasswordShortError() {
+        return false;
+    }
+
+    public boolean isnoEmailLoginError() {
+        return false;
     }
 }

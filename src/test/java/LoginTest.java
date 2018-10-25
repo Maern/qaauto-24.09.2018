@@ -36,8 +36,11 @@ public class LoginTest {
      * Postcondition:
      * - Close FF browser
      */
-    @Test
 
+
+    //TODO - remove casts for assert methods
+
+    @Test
     public void  successfulLoginTest () throws InterruptedException {
 
             webDriver.get("https://linkedin.com");
@@ -45,7 +48,7 @@ public class LoginTest {
 
             Assert.assertTrue(loginPage.isPageLoaded(),"Login page is not loaded");
 
-            ParentPage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
+            ParentLoginPage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
             sleep(10000);
             Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
 
@@ -67,7 +70,7 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
-        LoginSubmitPage loginSubmitPage = (LoginSubmitPage) loginPage.login("avdieievm@gmail.com", "Blastek18");
+        ParentLoginPage loginSubmitPage = loginPage.login("avdieievm@gmail.com", "Blastek18");
         sleep(4000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordWrongError(),"incorrect message displayed");
@@ -78,7 +81,7 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
-        LoginSubmitPage loginSubmitPage = (LoginSubmitPage) loginPage.login("avdieievm@gmail.com", "Bla8");
+        ParentLoginPage loginSubmitPage = loginPage.login("avdieievm@gmail.com", "Bla8");
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordShortError(),"incorrect message displayed");
@@ -88,7 +91,7 @@ public class LoginTest {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
-        LoginSubmitPage loginSubmitPage = (LoginSubmitPage) loginPage.login("John Doe", "Blastek17");
+        ParentLoginPage loginSubmitPage =  loginPage.login("John Doe", "Blastek17");
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isnoEmailLoginError(),"incorrect error message displayed");
@@ -98,7 +101,7 @@ public class LoginTest {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
-        LoginSubmitPage loginSubmitPage = (LoginSubmitPage) loginPage.login("avdieievm@gmail.co", "Blastek17");
+        ParentLoginPage loginSubmitPage = loginPage.login("avdieievm@gmail.co", "Blastek17");
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isinocrrectEmailError(),"incorrect error message displayed");
