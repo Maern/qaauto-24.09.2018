@@ -50,7 +50,7 @@ public class LoginTest {
             Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
 
         }
-//TO DO: add methods 'login' with correct returns (HomePage, LoginPage, LoginSubmitPage)
+
     @Test
     public void negativeLoginWithEmptyPasswordTest(){
         webDriver.get("https://linkedin.com");
@@ -68,7 +68,6 @@ public class LoginTest {
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
         LoginSubmitPage loginSubmitPage = loginPage.logine("avdieievm@gmail.com", "Blastek18");
-        //LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
         sleep(5000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordWrongError(),"incorrect message displayed");
@@ -80,7 +79,6 @@ public class LoginTest {
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
         LoginSubmitPage loginSubmitPage = loginPage.logine("avdieievm@gmail.com", "Bla8");
-        //LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordShortError(),"incorrect message displayed");
@@ -91,7 +89,6 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
         LoginSubmitPage loginSubmitPage = loginPage.logine("John Doe", "Blastek17");
-        //LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isnoEmailLoginError(),"incorrect error message displayed");
@@ -102,7 +99,6 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
         LoginSubmitPage loginSubmitPage = loginPage.logine("avdieievm@gmail.co", "Blastek17");
-        //LoginSubmitPage loginSubmitPage = new LoginSubmitPage(webDriver);
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isinocrrectEmailError(),"incorrect error message displayed");
