@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 //div[@id='control_gen_1'] - general error element
 //span[@id='session_key-login-error'] - login related errors
 
-public class LoginSubmitPage{
+public class LoginSubmitPage extends ParentPage{
     private WebDriver webDriver;
     @FindBy(xpath = "//div[@id='control_gen_1']")
     private WebElement pageErrorMessage;
@@ -39,17 +39,26 @@ public class LoginSubmitPage{
                 webDriver.getTitle().equals("Sign In to LinkedIn") && ispageErrorMessageDisplayed();
     }
     public boolean isnoEmailLoginError (){
-        return isloginErrorMessageDisplayed() && loginErrorMessage.getText().contains("Please enter a valid email address.");
+        return checkLogInError("Please enter a valid email address.");
     }
     public boolean isinocrrectEmailError(){
-        return isloginErrorMessageDisplayed() && loginErrorMessage.getText().contains("Hmm, we don't recognize that email. Please try again.");
+        return checkLogInError("Hmm, we don't recognize that email. Please try again.");
+    }
+
+    private boolean checkLogInError(String wrongEmail){
+        return isloginErrorMessageDisplayed() && loginErrorMessage.getText().contains(wrongEmail);
+
+    }
+
+    private boolean checkPasswordError (String wrongPassword){
+        return ispasswordErrorMessageDisplayed()&& passwordErrorMessage.getText().contains(wrongPassword);
     }
     public boolean ispasswordWrongError (){
-        return ispasswordErrorMessageDisplayed()&& passwordErrorMessage.getText().contains
+        return checkPasswordError
                 ("Hmm, that's not the right password. Please try again or request a new one.");
     }
     public boolean ispasswordShortError (){
-        return ispasswordErrorMessageDisplayed()&& passwordErrorMessage.getText().contains
+        return checkPasswordError
                 ("The password you provided must have at least 6 characters.");
     }
 }
