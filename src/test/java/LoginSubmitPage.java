@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 //div[@id='control_gen_1'] - general error element
 //span[@id='session_key-login-error'] - login related errors
 
-public class LoginSubmitPage{ //extends ParentPage{
+public class LoginSubmitPage{
     private WebDriver webDriver;
     @FindBy(xpath = "//div[@id='control_gen_1']")
     private WebElement pageErrorMessage;
@@ -34,13 +34,7 @@ public class LoginSubmitPage{ //extends ParentPage{
         return passwordErrorMessage.isDisplayed();
     }
 
-    /*private void initElements() {
-        pageErrorMessage = webDriver.findElement(By.xpath("//div[@id='control_gen_1']"));
-        loginErrorMessage = webDriver.findElement(By.xpath("//span[@id='session_key-login-error']"));
-        passwordErrorMessage = webDriver.findElement(By.xpath("//span[@id='session_password-login-error']"));
-    }*/
-
-    public boolean isPageLoaded(){
+       public boolean isPageLoaded(){
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME") &&
                 webDriver.getTitle().equals("Sign In to LinkedIn") && ispageErrorMessageDisplayed();
     }

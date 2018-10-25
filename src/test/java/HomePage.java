@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage{// extends ParentPage {
+public class HomePage {
     private WebDriver webDriver;
 
     @FindBy(xpath = "//*[@id='profile-nav-item']")
@@ -21,7 +21,8 @@ public class HomePage{// extends ParentPage {
 
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/feed/") &&
-                webDriver.getTitle().contains("LinkedIn") && isprofileNavItemDisplayed();
+                webDriver.getTitle().contains("LinkedIn") &&
+                isprofileNavItemDisplayed();
 
     }
 }

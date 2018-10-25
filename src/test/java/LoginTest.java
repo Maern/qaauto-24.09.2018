@@ -57,7 +57,7 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
 
-        loginPage.loginl("avdieievm@gmail.com", "");
+        loginPage.login("avdieievm@gmail.com", "");
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
     }
