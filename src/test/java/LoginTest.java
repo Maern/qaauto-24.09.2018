@@ -68,7 +68,7 @@ public class LoginTest {
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
         LoginSubmitPage loginSubmitPage = (LoginSubmitPage) loginPage.login("avdieievm@gmail.com", "Blastek18");
-        sleep(5000);
+        sleep(4000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.ispasswordWrongError(),"incorrect message displayed");
 }
