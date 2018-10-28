@@ -38,7 +38,16 @@ public class LoginSubmitPage extends ParentLoginPage {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME") &&
                 webDriver.getTitle().equals("Sign In to LinkedIn") && ispageErrorMessageDisplayed();
     }
-@Override
+    public String loginErrorText(){
+        return loginErrorMessage.getText();
+    }
+
+    public String passwordErrorText(){
+        return passwordErrorMessage.getText();
+    }
+
+
+    @Override
     public boolean isnoEmailLoginError() {
         return checkLogInError("Please enter a valid email address.");
     }

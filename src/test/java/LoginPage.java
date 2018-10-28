@@ -3,7 +3,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends ParentLoginPage {
+import static java.lang.Thread.sleep;
+
+public class LoginPage{ //extends ParentLoginPage {
 
     private WebDriver webDriver;
     @FindBy(xpath = "//*[@id='login-email']")
@@ -24,7 +26,28 @@ public class LoginPage extends ParentLoginPage {
         return signInButton.isDisplayed();
     }
 
-    public ParentLoginPage login (String userEmail, String userPassword){
+    public <T> T login(String userEmail, String userPassword) {
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(webDriver.getCurrentUrl().contains("/feed/")) {
+            return (T) new HomePage(webDriver);
+        }
+        if (webDriver.getCurrentUrl().contains("/uas/login-submit")) {
+        return (T) new LoginSubmitPage(webDriver);
+    }
+        else {
+        return (T) new LoginPage(webDriver);
+    }
+    }
+
+   /* public ParentLoginPage login (String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
@@ -34,10 +57,12 @@ public class LoginPage extends ParentLoginPage {
         else if (webDriver.getCurrentUrl().contains("https://www.linkedin.com/feed/")){
             return new HomePage(webDriver);
         }
-        else return new LoginSubmitPage(webDriver);
-    }
 
-    public boolean isPageLoaded() {
+        else return new LoginSubmitPage(webDriver);
+    }*/
+
+
+    public boolean isPageLoaded(){
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/") &&
                 webDriver.getTitle().equals("LinkedIn: Log In or Sign Up") &&
                 isSignInButtonDisplayed();

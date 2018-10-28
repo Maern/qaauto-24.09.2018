@@ -3,6 +3,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static java.lang.Thread.sleep;
@@ -19,6 +20,18 @@ public class LoginTest {
     public void afterMethod() {
         webDriver.quit();
     }
+
+    @DataProvider
+    public Object[][] validDataProvider() {
+        return new Object[][]{
+                { "avdieievm@gmail.com", "Blastek17" },
+                { "avdieievM@gmail.com","Blastek17" },
+                { " avdieievm@gmail.com ", "Blastek17" }
+        };
+
+
+    }
+
 
     /**
      *Preconditions:
@@ -37,45 +50,63 @@ public class LoginTest {
      * - Close FF browser
      */
 
-
-    //TODO - remove casts for assert methods
-
-    @Test
-    public void  successfulLoginTest () throws InterruptedException {
+    //Todo - err message. err message for pwd, email, pwd in data provider for neg tests
+    //todo - dataprovider for case with empty password
+    @Test(dataProvider = "validDataProvider")
+    public void  successfulLoginTest (String userEmail, String userPassword) throws InterruptedException {
 
             webDriver.get("https://linkedin.com");
             LoginPage loginPage = new LoginPage(webDriver);
 
             Assert.assertTrue(loginPage.isPageLoaded(),"Login page is not loaded");
 
-            ParentLoginPage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
+            HomePage homePage = loginPage.login(userEmail, userPassword);
             sleep(10000);
             Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
 
         }
+    @DataProvider
+    public Object[][] emptyPasswordDataProvider() {
+        return new Object[][]{
+                {"avdieievm@gmail.com", ""},
+        };
+    }
 
-    @Test
-    public void negativeLoginWithEmptyPasswordTest(){
+    @Test(dataProvider = "emptyPasswordDataProvider")
+    public void negativeLoginWithEmptyPasswordTest(String userEmail, String userPassword){
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
 
-        loginPage.login("avdieievm@gmail.com", "");
+        loginPage.login(userEmail, userPassword);
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
     }
-    @Test
-    public void negativePasswordTest() throws InterruptedException {
+
+    @DataProvider
+    public Object[][] negativeTestsDataProvider() {
+        return new Object[][]{
+                {"avdieievm@gmail.com", "Blastek18", "", "Hmm, that's not the right password. Please try again or request a new one."},
+                {"avdieievm@gmail.com", "Bte18", "", "The password you provided must have at least 6 characters."},
+                {"avdieievm@gmail.co", "Blastek17", "Hmm, we don't recognize that email. Please try again.", ""},
+                {"John Doe", "Blastek17", "Please enter a valid email address.", ""},
+        };
+    }
+
+    @Test(dataProvider = "negativeTestsDataProvider")
+    public void negativePasswordTest(String userEmail, String userPassword,
+                                     String userEmailError, String userPasswordError) throws InterruptedException {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
         Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
 
-        ParentLoginPage loginSubmitPage = loginPage.login("avdieievm@gmail.com", "Blastek18");
+        LoginSubmitPage loginSubmitPage = loginPage.login(userEmail, userPassword);
         sleep(4000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
-        Assert.assertTrue(loginSubmitPage.ispasswordWrongError(),"incorrect message displayed");
+        Assert.assertEquals(loginSubmitPage.passwordErrorText(),userPasswordError,"incorrect password message displayed");
+        Assert.assertEquals(loginSubmitPage.loginErrorText(),userEmailError, "incorrect login message displayed");
 }
-    @Test
+   /* @Test
     public void negativeShortPasswordTest() throws InterruptedException {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
@@ -105,6 +136,6 @@ public class LoginTest {
         sleep(3000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
         Assert.assertTrue(loginSubmitPage.isinocrrectEmailError(),"incorrect error message displayed");
-    }
+    }*/
 
     }
