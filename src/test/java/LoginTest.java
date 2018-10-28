@@ -32,7 +32,6 @@ public class LoginTest {
 
     }
 
-
     /**
      *Preconditions:
      * - Open FF browser
@@ -50,8 +49,6 @@ public class LoginTest {
      * - Close FF browser
      */
 
-    //Todo - err message. err message for pwd, email, pwd in data provider for neg tests
-    //todo - dataprovider for case with empty password
     @Test(dataProvider = "validDataProvider")
     public void  successfulLoginTest (String userEmail, String userPassword) throws InterruptedException {
 
@@ -106,36 +103,5 @@ public class LoginTest {
         Assert.assertEquals(loginSubmitPage.passwordErrorText(),userPasswordError,"incorrect password message displayed");
         Assert.assertEquals(loginSubmitPage.loginErrorText(),userEmailError, "incorrect login message displayed");
 }
-   /* @Test
-    public void negativeShortPasswordTest() throws InterruptedException {
-        webDriver.get("https://linkedin.com");
-        LoginPage loginPage = new LoginPage(webDriver);
-        Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
-
-        ParentLoginPage loginSubmitPage = loginPage.login("avdieievm@gmail.com", "Bla8");
-        sleep(3000);
-        Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
-        Assert.assertTrue(loginSubmitPage.ispasswordShortError(),"incorrect message displayed");
-        }
-    @Test
-    public void negativeNoEmailTest() throws InterruptedException {
-        webDriver.get("https://linkedin.com");
-        LoginPage loginPage = new LoginPage(webDriver);
-        Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
-        ParentLoginPage loginSubmitPage =  loginPage.login("John Doe", "Blastek17");
-        sleep(3000);
-        Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
-        Assert.assertTrue(loginSubmitPage.isnoEmailLoginError(),"incorrect error message displayed");
-        }
-    @Test
-    public void negativeIncorrectEmailTest() throws InterruptedException {
-        webDriver.get("https://linkedin.com");
-        LoginPage loginPage = new LoginPage(webDriver);
-        Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
-        ParentLoginPage loginSubmitPage = loginPage.login("avdieievm@gmail.co", "Blastek17");
-        sleep(3000);
-        Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
-        Assert.assertTrue(loginSubmitPage.isinocrrectEmailError(),"incorrect error message displayed");
-    }*/
 
     }
