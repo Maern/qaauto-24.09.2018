@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginSubmitPage extends ParentLoginPage {
     private WebDriver webDriver;
-    @FindBy(xpath = "//div[@id='control_gen_1']")
+    @FindBy(xpath = "//div[@role='alert']")
     private WebElement pageErrorMessage;
 
     @FindBy(xpath = "//span[@id='session_key-login-error']")
@@ -22,13 +22,14 @@ public class LoginSubmitPage extends ParentLoginPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public boolean ispageErrorMessageDisplayed() {
-        return pageErrorMessage.isDisplayed();
+    public String getAlertMessageText() {
+        return pageErrorMessage.getText();
     }
 
     public boolean isloginErrorMessageDisplayed() {
         return loginErrorMessage.isDisplayed();
     }
+
 
     public boolean ispasswordErrorMessageDisplayed() {
         return passwordErrorMessage.isDisplayed();
@@ -36,13 +37,14 @@ public class LoginSubmitPage extends ParentLoginPage {
 
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME") &&
-                webDriver.getTitle().equals("Sign In to LinkedIn") && ispageErrorMessageDisplayed();
+                webDriver.getTitle().equals("Sign In to LinkedIn");
     }
-    public String loginErrorText(){
+
+    public String loginErrorText() {
         return loginErrorMessage.getText();
     }
 
-    public String passwordErrorText(){
+    public String passwordErrorText() {
         return passwordErrorMessage.getText();
     }
 
@@ -51,7 +53,8 @@ public class LoginSubmitPage extends ParentLoginPage {
     public boolean isnoEmailLoginError() {
         return checkLogInError("Please enter a valid email address.");
     }
-@Override
+
+    @Override
     public boolean isinocrrectEmailError() {
         return checkLogInError("Hmm, we don't recognize that email. Please try again.");
     }
@@ -63,14 +66,18 @@ public class LoginSubmitPage extends ParentLoginPage {
     private boolean checkPasswordError(String wrongPassword) {
         return ispasswordErrorMessageDisplayed() && passwordErrorMessage.getText().contains(wrongPassword);
     }
-@Override
+
+    @Override
     public boolean ispasswordWrongError() {
         return checkPasswordError
                 ("Hmm, that's not the right password. Please try again or request a new one.");
     }
-@Override
+
+    @Override
     public boolean ispasswordShortError() {
         return checkPasswordError
                 ("The password you provided must have at least 6 characters.");
     }
+
+
 }

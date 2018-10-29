@@ -10,10 +10,13 @@ import static java.lang.Thread.sleep;
 
 public class LoginTest {
     WebDriver webDriver;
+    LoginPage loginPage;
 
     @BeforeMethod
     public void beforeMethod() {
         webDriver = new FirefoxDriver();
+        webDriver.get("https://linkedin.com");
+        LoginPage loginPage = new LoginPage(webDriver);
     }
 
     @AfterMethod
@@ -24,19 +27,19 @@ public class LoginTest {
     @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
-                { "avdieievm@gmail.com", "Blastek17" },
-                { "avdieievM@gmail.com","Blastek17" },
-                { " avdieievm@gmail.com ", "Blastek17" }
+                {"avdieievm@gmail.com", "Blastek17"},
+                {"avdieievM@gmail.com", "Blastek17"},
+                {" avdieievm@gmail.com ", "Blastek17"}
         };
 
 
     }
 
     /**
-     *Preconditions:
+     * Preconditions:
      * - Open FF browser
      * - Clear cookies
-     *
+     * <p>
      * Scenario
      * - Navigate to http://linkedin.com
      * - Verify that login page is loaded
@@ -44,24 +47,23 @@ public class LoginTest {
      * - Enter password ino userPassword field
      * - Click on signIn button
      * - Verify that home page is loaded
-     *
+     * <p>
      * Postcondition:
      * - Close FF browser
      */
 
     @Test(dataProvider = "validDataProvider")
-    public void  successfulLoginTest (String userEmail, String userPassword) throws InterruptedException {
 
-            webDriver.get("https://linkedin.com");
-            LoginPage loginPage = new LoginPage(webDriver);
+    public void successfulLoginTest(String userEmail, String userPassword) throws InterruptedException {
 
-            Assert.assertTrue(loginPage.isPageLoaded(),"Login page is not loaded");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
 
-            HomePage homePage = loginPage.login(userEmail, userPassword);
-            sleep(10000);
-            Assert.assertTrue(homePage.isPageLoaded(),"Home page is not loaded");
+        HomePage homePage = loginPage.login(userEmail, userPassword);
+        sleep(10000);
+        Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded");
 
-        }
+    }
+
     @DataProvider
     public Object[][] emptyPasswordDataProvider() {
         return new Object[][]{
@@ -70,9 +72,8 @@ public class LoginTest {
     }
 
     @Test(dataProvider = "emptyPasswordDataProvider")
-    public void negativeLoginWithEmptyPasswordTest(String userEmail, String userPassword){
-        webDriver.get("https://linkedin.com");
-        LoginPage loginPage = new LoginPage(webDriver);
+    public void negativeLoginWithEmptyPasswordTest(String userEmail, String userPassword) {
+
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
 
         loginPage.login(userEmail, userPassword);
@@ -91,17 +92,16 @@ public class LoginTest {
     }
 
     @Test(dataProvider = "negativeTestsDataProvider")
-    public void negativePasswordTest(String userEmail, String userPassword,
-                                     String userEmailError, String userPasswordError) throws InterruptedException {
-        webDriver.get("https://linkedin.com");
-        LoginPage loginPage = new LoginPage(webDriver);
-        Assert.assertTrue(loginPage.isPageLoaded(),"Login page URL is wrong.");
+    public void validationMessagesOnInvalidEmailPasswordTest(String userEmail, String userPassword,
+                                     String emailValidationMessage, String passwordValidationMessage) throws InterruptedException {
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
 
         LoginSubmitPage loginSubmitPage = loginPage.login(userEmail, userPassword);
-        sleep(4000);
-        Assert.assertTrue(loginSubmitPage.isPageLoaded(),"target page URL is wrong.");
-        Assert.assertEquals(loginSubmitPage.passwordErrorText(),userPasswordError,"incorrect password message displayed");
-        Assert.assertEquals(loginSubmitPage.loginErrorText(),userEmailError, "incorrect login message displayed");
-}
-
+        sleep(8000);
+        Assert.assertTrue(loginSubmitPage.isPageLoaded(), "target page URL is wrong.");
+        Assert.assertEquals(loginSubmitPage.getAlertMessageText(),"There were one or more errors in your submission. Please correct the marked fields below.", "Alert message text is wrong");
+        Assert.assertEquals(loginSubmitPage.passwordErrorText(), passwordValidationMessage, "incorrect password message displayed");
+        Assert.assertEquals(loginSubmitPage.loginErrorText(), emailValidationMessage, "incorrect login message displayed");
     }
+
+}
