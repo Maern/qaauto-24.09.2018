@@ -16,7 +16,7 @@ public class LoginTest {
     public void beforeMethod() {
         webDriver = new FirefoxDriver();
         webDriver.get("https://linkedin.com");
-        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage = new LoginPage(webDriver);
     }
 
     @AfterMethod
