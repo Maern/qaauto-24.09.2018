@@ -6,6 +6,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static java.lang.Thread.sleep;
 
 public class SearchTest {
@@ -40,14 +42,14 @@ public class SearchTest {
     public void afterMethod() {
         webDriver.quit();
     }
-//todo - HomePage should have method to enter 'HR' in searchField
-    //todo - PageObject search with isPageLoaded method
+//todo - HomePage should have method to enter 'HR' in searchField - done
+    //todo - PageObject search with isPageLoaded method - done
     //todo - check results - 10 per page and have 'HR' term
-    //todo SearchPage should have method to return number of search results
-    //todo SearchPage list/array method which should return search Term
+    //todo SearchPage should have method to return number of search results - done
+    //todo SearchPage list/array method which should return search Term - done
     @Test
     public void basicSearchTest(){
-
+        String searchTerm = "HR";
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
         HomePage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
         try {
@@ -56,6 +58,18 @@ public class SearchTest {
             e.printStackTrace();
         }
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded");
+        SearchPage searchPage = homePage.search(searchTerm);
+        try {
+            sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Assert.assertTrue(searchPage.isPageLoaded(), "Search page is not loaded");
+        Assert.assertEquals(searchPage.getResultNumber(),10,"Incorrect number of search results");
 
+        List<String> searchResultsList = searchPage.getSearchResults();
+        for (String searchResult : searchResultsList) {
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()), "Incorrect searchTerm detected");
+        }
     }
 }
