@@ -44,7 +44,7 @@ public class SearchTest {
     }
 //todo - HomePage should have method to enter 'HR' in searchField - done
     //todo - PageObject search with isPageLoaded method - done
-    //todo - check results - 10 per page and have 'HR' term
+    //todo - check results - 10 per page and have 'HR' term - done
     //todo SearchPage should have method to return number of search results - done
     //todo SearchPage list/array method which should return search Term - done
     @Test

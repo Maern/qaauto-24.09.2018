@@ -36,7 +36,7 @@ public class SearchPage {
     public List<String> getSearchResults(){
         List<String> responseResultsList = new ArrayList<String>();
 for (WebElement searchResult : searchResults){
-    ((JavascriptExecutor)webDriver).executeScript("window.scrollBy(0,250);", searchResult);
+    ((JavascriptExecutor)webDriver).executeScript("window.scrollBy(0,250);");
 responseResultsList.add(searchResult.getText());
         }
 return responseResultsList;
