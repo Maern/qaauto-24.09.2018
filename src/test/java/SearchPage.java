@@ -9,15 +9,16 @@ import java.util.List;
 
 public class SearchPage {
     private WebDriver webDriver;
-    @FindBy (xpath="//h3 [contains(@class, 'search-results__total')]")
+    @FindBy(xpath = "//h3 [contains(@class, 'search-results__total')]")
     private WebElement searchResultsTotal;
 
-    @FindBy (xpath="//li[contains(@class, 'search-result__occluded')]")
-    private List<WebElement> searchResults;
+    @FindBy(xpath = "//li[contains(@class, 'search-result__occluded')]")
+    private List <WebElement> searchResults;
 
-    public boolean issearchResultsTotalDisplayed(){
+    public boolean issearchResultsTotalDisplayed() {
         return searchResultsTotal.isDisplayed();
     }
+
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().contains("https://www.linkedin.com/search/results") &&
                 webDriver.getTitle().contains("Search | LinkedIn") &&
@@ -29,16 +30,16 @@ public class SearchPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public int getResultNumber(){
+    public int getResultNumber() {
         return searchResults.size();
     }
 
-    public List<String> getSearchResults(){
-        List<String> responseResultsList = new ArrayList<String>();
-for (WebElement searchResult : searchResults){
-    ((JavascriptExecutor)webDriver).executeScript("window.scrollBy(0,250);");
-responseResultsList.add(searchResult.getText());
+    public List <String> getSearchResults() {
+        List <String> responseResultsList = new ArrayList <String>();
+        for (WebElement searchResult : searchResults) {
+            ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();",searchResult);
+            responseResultsList.add(searchResult.getText());
         }
-return responseResultsList;
+        return responseResultsList;
     }
 }

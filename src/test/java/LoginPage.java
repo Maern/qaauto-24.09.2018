@@ -17,9 +17,22 @@ public class LoginPage{ //extends ParentLoginPage {
     @FindBy(xpath = "//*[@id='login-submit']")
     private WebElement signInButton;
 
+    @FindBy(xpath="//a[@class='link-forgot-password']")
+    private WebElement forgotPasswordLink;
+
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
+    }
+
+    public RequestPasswordResetPage clickForgotPassword() {
+        try {
+            sleep (3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        forgotPasswordLink.click();
+        return new RequestPasswordResetPage(webDriver);
     }
 
     public boolean isSignInButtonDisplayed() {

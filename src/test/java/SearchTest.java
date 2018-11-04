@@ -15,7 +15,7 @@ public class SearchTest {
      * PreConditions:
      * - Open new Browser.
      * - Navigate to http://linkedin.com
-     *
+     * <p>
      * Scenario:
      * - Verify that Login page is loaded
      * - Log in with valid credentials
@@ -24,7 +24,7 @@ public class SearchTest {
      * - Verify that Search page is loaded
      * - Verify 10 searchResults displayed on page
      * - Verify each result item contains searchTerm
-     *
+     * <p>
      * PostConditions:
      * - Close FF browser
      */
@@ -42,34 +42,35 @@ public class SearchTest {
     public void afterMethod() {
         webDriver.quit();
     }
-//todo - HomePage should have method to enter 'HR' in searchField - done
-    //todo - PageObject search with isPageLoaded method - done
-    //todo - check results - 10 per page and have 'HR' term - done
-    //todo SearchPage should have method to return number of search results - done
-    //todo SearchPage list/array method which should return search Term - done
+
+
     @Test
-    public void basicSearchTest(){
+    public void basicSearchTest() {
         String searchTerm = "HR";
+
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
+
         HomePage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
+
+        Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded");
         try {
             sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded");
         SearchPage searchPage = homePage.search(searchTerm);
+
         try {
             sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         Assert.assertTrue(searchPage.isPageLoaded(), "Search page is not loaded");
-        Assert.assertEquals(searchPage.getResultNumber(),10,"Incorrect number of search results");
+        Assert.assertEquals(searchPage.getResultNumber(), 10, "Incorrect number of search results");
 
-        List<String> searchResultsList = searchPage.getSearchResults();
+        List <String> searchResultsList = searchPage.getSearchResults();
         for (String searchResult : searchResultsList) {
-            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()), "Incorrect searchTerm detected");
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()), "SearchTerm"+searchTerm+"not found in"+searchResult);
         }
     }
 }
