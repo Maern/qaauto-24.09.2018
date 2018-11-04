@@ -21,7 +21,7 @@ public class PasswordResetTest {
      * - Enter the valid email address
      * - Click the 'Find Account' button
      * - Wait until email with reset password link is received
-     * - Copy-paste link to browser and go to it
+     * - Copy-paste link to browser and go to its destination
      * - Enter new password
      * - Login with your new password
      * - Verify that HomePage is loaded
