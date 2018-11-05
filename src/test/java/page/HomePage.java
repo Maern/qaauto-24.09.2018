@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,8 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class HomePage extends ParentLoginPage {
-    private WebDriver webDriver;
+public class HomePage extends BasePage {
 
     @FindBy(xpath = "//*[@id='profile-nav-item']")
     private WebElement profileNavItem;
@@ -37,19 +38,5 @@ public class HomePage extends ParentLoginPage {
         return new SearchPage(webDriver);
 
     }
-    public boolean isinocrrectEmailError() {
-        return false;
-    }
 
-    public boolean ispasswordWrongError() {
-        return false;
-    }
-
-    public boolean ispasswordShortError() {
-        return false;
-    }
-
-    public boolean isnoEmailLoginError() {
-        return false;
-    }
 }

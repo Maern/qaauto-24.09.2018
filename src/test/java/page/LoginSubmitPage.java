@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -6,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 //div[@id='control_gen_1'] - general error element
 //span[@id='session_key-login-error'] - login related errors
 
-public class LoginSubmitPage extends ParentLoginPage {
+public class LoginSubmitPage extends BasePage {
     private WebDriver webDriver;
     @FindBy(xpath = "//div[@role='alert']")
     private WebElement pageErrorMessage;

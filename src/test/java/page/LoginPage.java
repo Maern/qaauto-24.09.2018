@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -5,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class LoginPage{ //extends ParentLoginPage {
+public class LoginPage{ //extends page.BasePage {
 
     private WebDriver webDriver;
     @FindBy(xpath = "//*[@id='login-email']")
@@ -60,18 +62,18 @@ public class LoginPage{ //extends ParentLoginPage {
     }
     }
 
-   /* public ParentLoginPage login (String userEmail, String userPassword) {
+   /* public page.BasePage login (String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
         if (webDriver.getCurrentUrl().equals("https://www.linkedin.com/")){
-            return new LoginPage(webDriver);
+            return new page.LoginPage(webDriver);
         }
         else if (webDriver.getCurrentUrl().contains("https://www.linkedin.com/feed/")){
-            return new HomePage(webDriver);
+            return new page.HomePage(webDriver);
         }
 
-        else return new LoginSubmitPage(webDriver);
+        else return new page.LoginSubmitPage(webDriver);
     }*/
 
 

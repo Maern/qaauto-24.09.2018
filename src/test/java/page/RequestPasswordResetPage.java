@@ -1,11 +1,12 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import util.GMailService;
 
-public class RequestPasswordResetPage {
-
-    private WebDriver webDriver;
+public class RequestPasswordResetPage extends BasePage{
 
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     private WebElement resetPasswordButton;
@@ -28,10 +29,15 @@ public class RequestPasswordResetPage {
                 isresetPasswordButtonDisplayed();
     }
 
-    public ChooseNewPasswordPage findAccount(String userName){
+    public ResetPasswordSubmitPage findAccount(String userName){
+
+        GMailService gMailService = new GMailService();
+        gMailService.connect();
+
         userNameField.sendKeys(userName);
         resetPasswordButton.click();
-        return new ChooseNewPasswordPage(webDriver);
+
+        return new ResetPasswordSubmitPage(webDriver);
     }
 
 }
