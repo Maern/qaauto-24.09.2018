@@ -1,6 +1,7 @@
 package page;
 
 import org.openqa.selenium.WebDriver;
+import util.GMailService;
 
 public abstract class BasePage {
 
@@ -8,5 +9,6 @@ public abstract class BasePage {
 
     public abstract boolean isPageLoaded();
 
+    protected static GMailService gMailService = new GMailService();
 
 }

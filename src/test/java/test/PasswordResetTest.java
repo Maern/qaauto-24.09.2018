@@ -35,6 +35,11 @@ public class PasswordResetTest extends BaseTest{
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
         RequestPasswordResetPage requestPasswordResetPage = loginPage.clickForgotPassword();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assert.assertTrue(requestPasswordResetPage.isPageLoaded(), "Reset Password page is not loaded");
         ResetPasswordSubmitPage resetPasswordSubmitPage = requestPasswordResetPage.findAccount("avdieievm@gmail.com");
 
@@ -44,6 +49,7 @@ public class PasswordResetTest extends BaseTest{
             e.printStackTrace();
         }
         Assert.assertTrue(resetPasswordSubmitPage.isPageLoaded(), "Password Submit page is not loaded");
+        ChooseNewPasswordPage chooseNewPasswordPage = resetPasswordSubmitPage.navigateToLinkFromEmail();
         Assert.assertTrue(chooseNewPasswordPage.isPageLoaded(), "Set New Password page is not loaded");
 
         SuccessfulPasswordResetPage successfulPasswordResetPage = chooseNewPasswordPage.setNewUserPassword(newUserPassword);

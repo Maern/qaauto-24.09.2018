@@ -51,12 +51,12 @@ public class LoginSubmitPage extends BasePage {
     }
 
 
-    @Override
+
     public boolean isnoEmailLoginError() {
         return checkLogInError("Please enter a valid email address.");
     }
 
-    @Override
+
     public boolean isinocrrectEmailError() {
         return checkLogInError("Hmm, we don't recognize that email. Please try again.");
     }
@@ -69,13 +69,13 @@ public class LoginSubmitPage extends BasePage {
         return ispasswordErrorMessageDisplayed() && passwordErrorMessage.getText().contains(wrongPassword);
     }
 
-    @Override
+
     public boolean ispasswordWrongError() {
         return checkPasswordError
                 ("Hmm, that's not the right password. Please try again or request a new one.");
     }
 
-    @Override
+
     public boolean ispasswordShortError() {
         return checkPasswordError
                 ("The password you provided must have at least 6 characters.");

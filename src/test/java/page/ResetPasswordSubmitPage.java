@@ -1,13 +1,17 @@
 package page;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import util.GMailService;
 
-public class ResetPasswordSubmitPage extends BasePage{
+import static java.lang.Thread.sleep;
 
-    @FindBy(xpath = "//button[@class='resend__link']")
+public class ResetPasswordSubmitPage extends BasePage {
+
+    @FindBy(xpath = "//button[@id='resend-url']")
     private WebElement resendLinkButton;
 
     public ResetPasswordSubmitPage(WebDriver webDriver) {
@@ -15,25 +19,45 @@ public class ResetPasswordSubmitPage extends BasePage{
         PageFactory.initElements(webDriver, this);
 
     }
-public boolean isresentButtonDisplayed(){
+
+    //GMailService gMailService = new GMailService();
+
+    public boolean isresentButtonDisplayed() {
         return resendLinkButton.isDisplayed();
-}
-public boolean isPageLoaded(){
+    }
+
+    public boolean isPageLoaded() {
         return isresentButtonDisplayed() && webDriver.getCurrentUrl().contains("/rp/request-password-reset-submit") &&
-                webDriver.getTitle().contains("Please check your mail for reset password link.  | LinkedIn");
+                webDriver.getTitle().contains("Please check your mail for reset password link");
 
-}
+    }
 
-/*public page.ChooseNewPasswordPage navigateToLinkFromEmail(){
-    String messageSubject = "Mykola, here's the link to reset your password";
-    String messageTo = "avdieievm@gmail.com";
-    String messageFrom = "security-noreply@linkedin.com";
+    private String getEmailUrl(String resetLink) {
+        String beginUrlString = "password, click <a href=\"";
+        int beginIndex = resetLink.indexOf(beginUrlString);
+        if (beginIndex != -1) {
+            int endIndex = resetLink.indexOf("\" style=", beginIndex);
+            if (endIndex != -1) {
+                return resetLink.substring(beginIndex+beginUrlString.length(), endIndex).replaceAll("amp;","");
+            }
 
-    String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
+        }
+        return null;
+    }
+
+    public page.ChooseNewPasswordPage navigateToLinkFromEmail() {
+
+        String messageSubject = " here's the link to reset your password";
+        String messageTo = "avdieievm@gmail.com";
+        String messageFrom = "security-noreply@linkedin.com";
+
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 300);
         System.out.println("Content: " + message);
-StringUtils.
-
-return ChooseNewPasswordPage(webDriver);
-}*/
+        //String emailResetLink = StringUtils.substringBetween(message, "password, click <a href=\"", "\" style=").replace("amp;","");
+        String resetLink = getEmailUrl(message);
+        System.out.println(resetLink);
+        webDriver.get(resetLink);
+        return new ChooseNewPasswordPage(webDriver);
+    }
 
 }
