@@ -46,12 +46,11 @@ public class ResetPasswordSubmitPage extends BasePage {
     }
 
     public page.ChooseNewPasswordPage navigateToLinkFromEmail() {
-
-        String messageSubject = " here's the link to reset your password";
+        String messageSubject = "here's the link to reset your password";
         String messageTo = "avdieievm@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 300);
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
         System.out.println("Content: " + message);
         //String emailResetLink = StringUtils.substringBetween(message, "password, click <a href=\"", "\" style=").replace("amp;","");
         String resetLink = getEmailUrl(message);

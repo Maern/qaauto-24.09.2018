@@ -39,7 +39,7 @@ public class RequestPasswordResetPage extends BasePage{
         userNameField.sendKeys(userName);
         resetPasswordButton.click();
 
-        /*String messageSubject = " here's the link to reset your password";
+        /*String messageSubject = "here's the link to reset your password";
         String messageTo = "avdieievm@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
@@ -48,6 +48,7 @@ public class RequestPasswordResetPage extends BasePage{
         String emailResetLink = StringUtils.substringBetween(message, "password, click <a href=\"", "\" style=").replace("amp;","");
         System.out.println(emailResetLink);
         webDriver.get(emailResetLink);*/
+
 
         return new ResetPasswordSubmitPage(webDriver);
     }

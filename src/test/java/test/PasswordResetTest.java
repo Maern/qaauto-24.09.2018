@@ -44,7 +44,7 @@ public class PasswordResetTest extends BaseTest{
         ResetPasswordSubmitPage resetPasswordSubmitPage = requestPasswordResetPage.findAccount("avdieievm@gmail.com");
 
         try {
-            sleep(90000);
+            sleep(9000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
