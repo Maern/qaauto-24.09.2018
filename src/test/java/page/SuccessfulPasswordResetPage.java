@@ -24,7 +24,7 @@ public class SuccessfulPasswordResetPage extends BasePage{
 
     /**
      * Method to click goToHomeButton after changing password
-     * @return HomePage Pageobject
+     * @return HomePage PageObject
      */
     public HomePage clickGoToHomeButton(){
         goToHomeButton.click();

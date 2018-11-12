@@ -30,6 +30,11 @@ public class RequestPasswordResetPage extends BasePage{
                 isresetPasswordButtonDisplayed();
     }
 
+    /**
+     * Method which connects gMailService to inbox, sends userName and clicks reset Password button
+     * @param userName string with user email
+     * @return new ResetPasswordSubmitPage PageObject
+     */
     public ResetPasswordSubmitPage findAccount(String userName){
 
 

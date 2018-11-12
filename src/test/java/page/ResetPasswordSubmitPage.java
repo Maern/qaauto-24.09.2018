@@ -30,6 +30,11 @@ public class ResetPasswordSubmitPage extends BasePage {
 
     }
 
+    /**
+     * Method to extract reset password link from email message using IndexOf
+     * @param resetLink string from email message
+     * @return substring of resetLink String, which is located between beginIndex and endIndex
+     */
     private String getEmailUrl(String resetLink) {
         String beginUrlString = "password, click <a href=\"";
         int beginIndex = resetLink.indexOf(beginUrlString);
@@ -43,6 +48,10 @@ public class ResetPasswordSubmitPage extends BasePage {
         return null;
     }
 
+    /**
+     * Method to navigate to link, extracted from email, where new password could be set
+     * @return ChooseNewPasswordPage PageObject
+     */
     public page.ChooseNewPasswordPage navigateToLinkFromEmail() {
         String messageSubject = "here's the link to reset your password";
         String messageTo = "avdieievm@gmail.com";

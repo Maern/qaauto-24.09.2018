@@ -65,11 +65,6 @@ public class LoginPage extends page.BasePage {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-        /*try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
 
         if(waitPageUrlContains("/feed/")) {
             return (T) new HomePage(webDriver);
