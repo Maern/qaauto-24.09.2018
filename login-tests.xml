@@ -16,8 +16,8 @@
         <classes>
             <class name="test.LoginTest">
                 <methods>
-                    <include name="negativeLoginWithEmptyPasswordTest"/>
-                    <include name="validationMessagesOnInvalidEmailPasswordTest"/>
+                    <include name="validationMessagesOnInvalidEmailPasswordTest" />
+                    <include name="negativeLoginWithEmptyPasswordTest" />
                 </methods>
             </class>
         </classes>
