@@ -6,16 +6,16 @@ import org.testng.annotations.Test;
 import page.HomePage;
 import page.LoginSubmitPage;
 
-import static java.lang.Thread.sleep;
+
 
 public class LoginTest extends BaseTest{
 
     @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
-                {"avdieievm@gmail.com", "Blastek17"},
-                {"avdieievM@gmail.com", "Blastek17"},
-                {" avdieievm@gmail.com ", "Blastek17"}
+                {"avdieievm@gmail.com", "Abcd12#4%"},
+                {"avdieievM@gmail.com", "Abcd12#4%"},
+                {" avdieievm@gmail.com ", "Abcd12#4%"}
         };
 
 
@@ -40,12 +40,11 @@ public class LoginTest extends BaseTest{
 
     @Test(dataProvider = "validDataProvider")
 
-    public void successfulLoginTest(String userEmail, String userPassword) throws InterruptedException {
+    public void successfulLoginTest(String userEmail, String userPassword) {
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
 
         HomePage homePage = loginPage.login(userEmail, userPassword);
-        sleep(10000);
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded");
 
     }
@@ -79,11 +78,10 @@ public class LoginTest extends BaseTest{
 
     @Test(dataProvider = "negativeTestsDataProvider")
     public void validationMessagesOnInvalidEmailPasswordTest(String userEmail, String userPassword,
-                                     String emailValidationMessage, String passwordValidationMessage) throws InterruptedException {
+                                     String emailValidationMessage, String passwordValidationMessage) {
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page URL is wrong.");
 
         LoginSubmitPage loginSubmitPage = loginPage.login(userEmail, userPassword);
-        sleep(8000);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(), "target page URL is wrong.");
         Assert.assertEquals(loginSubmitPage.getAlertMessageText(),"There were one or more errors in your submission. Please correct the marked fields below.", "Alert message text is wrong");
         Assert.assertEquals(loginSubmitPage.passwordErrorText(), passwordValidationMessage, "incorrect password message displayed");

@@ -6,10 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
+/**
+ * LoginPage PageObject class
+ */
+public class LoginPage extends page.BasePage {
 
-public class LoginPage{ //extends page.BasePage {
-
-    private WebDriver webDriver;
+//    private WebDriver webDriver;
     @FindBy(xpath = "//*[@id='login-email']")
     private WebElement userEmailField;
 
@@ -22,39 +24,57 @@ public class LoginPage{ //extends page.BasePage {
     @FindBy(xpath="//a[@class='link-forgot-password']")
     private WebElement forgotPasswordLink;
 
+    /**
+     * Constructor for LoginPage
+     *
+     * @param webDriver - WebDriver instance from tests
+     */
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to click on forgotPassword link
+     *
+     * @return RequestPasswordResetPage PageObject
+     */
     public RequestPasswordResetPage clickForgotPassword() {
-        try {
-            sleep (3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitUntilElementIsClickable(forgotPasswordLink);
         forgotPasswordLink.click();
         return new RequestPasswordResetPage(webDriver);
     }
 
+    /**
+     * Simple check if web element is displayed, results used in isPageLoaded method below
+     *
+     * @return boolean value of check
+     */
     public boolean isSignInButtonDisplayed() {
         return signInButton.isDisplayed();
     }
 
+    /**
+     * Method is used to enter user Email and Password, then click on SignIn button
+     * @param userEmail - String with user email
+     * @param userPassword - String with user password
+     * @param <T> - generic type used to return correct PageObject
+     * @return - returns HomePage, LoginSubmitPage or LoginPage PageObject
+     */
     public <T> T login(String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-        try {
+        /*try {
             sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        if(webDriver.getCurrentUrl().contains("/feed/")) {
+        if(waitPageUrlContains("/feed/")) {
             return (T) new HomePage(webDriver);
         }
-        if (webDriver.getCurrentUrl().contains("/uas/login-submit")) {
+        if (waitPageUrlContains("/uas/login-submit")) {
         return (T) new LoginSubmitPage(webDriver);
     }
         else {
@@ -62,21 +82,12 @@ public class LoginPage{ //extends page.BasePage {
     }
     }
 
-   /* public page.BasePage login (String userEmail, String userPassword) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        if (webDriver.getCurrentUrl().equals("https://www.linkedin.com/")){
-            return new page.LoginPage(webDriver);
-        }
-        else if (webDriver.getCurrentUrl().contains("https://www.linkedin.com/feed/")){
-            return new page.HomePage(webDriver);
-        }
 
-        else return new page.LoginSubmitPage(webDriver);
-    }*/
-
-
+    /**
+     * Method checks if page loaded by using isSignInButtonDisplayed and webElements presense
+     *
+     * @return boolean value of checks
+     */
     public boolean isPageLoaded(){
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/") &&
                 webDriver.getTitle().equals("LinkedIn: Log In or Sign Up") &&
@@ -84,19 +95,4 @@ public class LoginPage{ //extends page.BasePage {
 
     }
 
-    public boolean isinocrrectEmailError() {
-        return false;
-    }
-
-    public boolean ispasswordWrongError() {
-        return false;
-    }
-
-    public boolean ispasswordShortError() {
-        return false;
-    }
-
-    public boolean isnoEmailLoginError() {
-        return false;
-    }
 }

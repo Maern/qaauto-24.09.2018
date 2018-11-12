@@ -1,11 +1,10 @@
 package page;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import util.GMailService;
+
 
 public class RequestPasswordResetPage extends BasePage{
 
@@ -19,7 +18,7 @@ public class RequestPasswordResetPage extends BasePage{
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
-    //GMailService gMailService = new GMailService();
+
 
     public boolean isresetPasswordButtonDisplayed() {
         return resetPasswordButton.isDisplayed();
@@ -38,17 +37,6 @@ public class RequestPasswordResetPage extends BasePage{
 
         userNameField.sendKeys(userName);
         resetPasswordButton.click();
-
-        /*String messageSubject = "here's the link to reset your password";
-        String messageTo = "avdieievm@gmail.com";
-        String messageFrom = "security-noreply@linkedin.com";
-
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
-        System.out.println("Content: " + message);
-        String emailResetLink = StringUtils.substringBetween(message, "password, click <a href=\"", "\" style=").replace("amp;","");
-        System.out.println(emailResetLink);
-        webDriver.get(emailResetLink);*/
-
 
         return new ResetPasswordSubmitPage(webDriver);
     }

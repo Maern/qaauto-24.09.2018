@@ -22,6 +22,10 @@ public class SuccessfulPasswordResetPage extends BasePage{
         return webDriver.getTitle().contains("You've successfully reset your password. | LinkedIn") && isGoToHomeDisplayed();
     }
 
+    /**
+     * Method to click goToHomeButton after changing password
+     * @return HomePage Pageobject
+     */
     public HomePage clickGoToHomeButton(){
         goToHomeButton.click();
         return new HomePage(webDriver);

@@ -32,6 +32,12 @@ public class HomePage extends BasePage {
                 isprofileNavItemDisplayed();
 
     }
+
+    /**
+     * Method to perform a search on LinkedIn HomePge
+     * @param searchTerm string with search term to be inserted in searchfield
+     * @return SearchPage PageObject
+     */
     public SearchPage search(String searchTerm){
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.RETURN);

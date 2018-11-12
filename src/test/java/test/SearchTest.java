@@ -7,7 +7,7 @@ import page.SearchPage;
 
 import java.util.List;
 
-import static java.lang.Thread.sleep;
+
 
 public class SearchTest extends BaseTest{
     /**
@@ -34,21 +34,12 @@ public class SearchTest extends BaseTest{
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
 
-        HomePage homePage = loginPage.login("avdieievm@gmail.com", "Blastek17");
+        HomePage homePage = loginPage.login("avdieievm@gmail.com", "Abcd12#4%");
 
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded");
-        try {
-            sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         SearchPage searchPage = homePage.search(searchTerm);
 
-        try {
-            sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assert.assertTrue(searchPage.isPageLoaded(), "Search page is not loaded");
         Assert.assertEquals(searchPage.getResultNumber(), 10, "Incorrect number of search results");
 

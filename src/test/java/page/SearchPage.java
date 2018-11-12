@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchPage {
+public class SearchPage extends BasePage{
     private WebDriver webDriver;
     @FindBy(xpath = "//h3 [contains(@class, 'search-results__total')]")
     private WebElement searchResultsTotal;
@@ -22,8 +22,8 @@ public class SearchPage {
     }
 
     public boolean isPageLoaded() {
-        return webDriver.getCurrentUrl().contains("https://www.linkedin.com/search/results") &&
-                webDriver.getTitle().contains("Search | LinkedIn") &&
+        return waitPageUrlContains("https://www.linkedin.com/search/results") &&
+                waitPageUrlContains("Search | LinkedIn") &&
                 issearchResultsTotalDisplayed();
     }
 
@@ -32,10 +32,19 @@ public class SearchPage {
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * method to get the size of searchresults List
+     * @return size of the list, containing searchResults webElements
+     */
     public int getResultNumber() {
         return searchResults.size();
     }
 
+    /**
+     * Method to get text of searchResults webElement into ArrayList. JavascriptExecutor is used to scroll down the web page
+     * and get all search results visible
+     * @return List of strings containing text from searchResults element
+     */
     public List <String> getSearchResults() {
         List <String> responseResultsList = new ArrayList <String>();
         for (WebElement searchResult : searchResults) {

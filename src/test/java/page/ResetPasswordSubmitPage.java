@@ -1,13 +1,12 @@
 package page;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import util.GMailService;
 
-import static java.lang.Thread.sleep;
+
+
 
 public class ResetPasswordSubmitPage extends BasePage {
 
@@ -20,7 +19,6 @@ public class ResetPasswordSubmitPage extends BasePage {
 
     }
 
-    //GMailService gMailService = new GMailService();
 
     public boolean isresentButtonDisplayed() {
         return resendLinkButton.isDisplayed();
@@ -52,7 +50,6 @@ public class ResetPasswordSubmitPage extends BasePage {
 
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
         System.out.println("Content: " + message);
-        //String emailResetLink = StringUtils.substringBetween(message, "password, click <a href=\"", "\" style=").replace("amp;","");
         String resetLink = getEmailUrl(message);
         System.out.println(resetLink);
         webDriver.get(resetLink);
