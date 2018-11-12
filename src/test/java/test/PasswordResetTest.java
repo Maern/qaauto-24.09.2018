@@ -31,7 +31,7 @@ public class PasswordResetTest extends BaseTest{
 
     @Test
     public void successfulResetPasswordTest() {
-        String newUserPassword = "Abcd12#4%6";
+        String newUserPassword = "Abcd12#4%7";
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded");
         RequestPasswordResetPage requestPasswordResetPage = loginPage.clickForgotPassword();

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
  * LoginSubmitPage PageObject
  */
 public class LoginSubmitPage extends BasePage {
-    private WebDriver webDriver;
+
     @FindBy(xpath = "//div[@role='alert']")
     private WebElement pageErrorMessage;
 
@@ -37,7 +37,7 @@ public class LoginSubmitPage extends BasePage {
      * @return boolean value of check
      */
     public boolean isPageLoaded() {
-        return webDriver.getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME") &&
+        return waitPageUrlContains("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME") &&
                 webDriver.getTitle().equals("Sign In to LinkedIn");
     }
 

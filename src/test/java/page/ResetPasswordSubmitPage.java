@@ -25,7 +25,7 @@ public class ResetPasswordSubmitPage extends BasePage {
     }
 
     public boolean isPageLoaded() {
-        return isresentButtonDisplayed() && webDriver.getCurrentUrl().contains("/rp/request-password-reset-submit") &&
+        return isresentButtonDisplayed() && waitPageUrlContains("/rp/request-password-reset-submit") &&
                 webDriver.getTitle().contains("Please check your mail for reset password link");
 
     }

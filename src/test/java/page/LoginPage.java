@@ -5,13 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
+
 /**
  * LoginPage PageObject class
  */
 public class LoginPage extends page.BasePage {
 
-//    private WebDriver webDriver;
+
     @FindBy(xpath = "//*[@id='login-email']")
     private WebElement userEmailField;
 
